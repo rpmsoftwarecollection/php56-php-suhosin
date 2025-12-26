@@ -36,7 +36,7 @@
 %global ini_name  40-%{ext_name}.ini
 %endif
 
-Name:           %{?sub_prefix}php-suhosin
+Name:           php56-php-suhosin
 Version:        0.9.38
 Release:        3%{?dist}%{!?nophptag:%(%{__php} -r 'echo ".".PHP_MAJOR_VERSION.".".PHP_MINOR_VERSION;')}
 Summary:        Suhosin is an advanced protection system for PHP installations
@@ -44,11 +44,7 @@ Summary:        Suhosin is an advanced protection system for PHP installations
 Group:          Development/Languages
 License:        PHP
 URL:            http://www.hardened-php.net/suhosin/
-%if 0%{?gh_commit:1}
-Source0:        https://github.com/%{gh_owner}/%{gh_project}/archive/%{gh_commit}/%{gh_project}-%{version}-%{gh_short}.tar.gz
-%else
-Source0:        http://download.suhosin.org/suhosin-%{version}.tar.gz
-%endif
+Source0:        https://github.com/sektioneins/suhosin/archive/refs/tags/0.9.38.tar.gz
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:  %{?scl_prefix}php-devel > 5.4
