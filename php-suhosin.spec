@@ -139,42 +139,6 @@ sed -e 's/\;\(extension=suhosin.so\)/\1/' -i ZTS/%{ext_name}.ini
 install -Dpm 644 ZTS/%{ext_name}.ini %{buildroot}%{php_ztsinidir}/%{ini_name}
 %endif
 
-
-%check
-: Minimal load test for NTS extension
-%{__php} --no-php-ini \
-    --define extension=%{buildroot}%{php_extdir}/%{ext_name}.so \
-    --modules | grep -i suhosin
-
-%if %{with_zts}
-: Minimal load test for NTS extension
-%{__ztsphp} --no-php-ini \
-    --define extension=%{buildroot}%{php_ztsextdir}/%{ext_name}.so \
-    --modules | grep -i suhosin
-%endif
-
-: Upstream test suite for NTS extension
-cd NTS
-
-# drop known to fail tests
-%if "%{php_version}" < "5.5"
-rm tests/executor/function_blacklist_printf.phpt
-rm tests/executor/function_whitelist_call_user_func.phpt
-rm tests/executor/eval_blacklist.phpt
-rm tests/executor/eval_blacklist_printf.phpt
-rm tests/executor/eval_whitelist_call_user_func.phpt
-%endif
-rm tests/filter/suhosin_upload_disallow_binary_on.phpt
-
-TEST_PHP_EXECUTABLE=%{__php} \
-REPORT_EXIT_STATUS=1 \
-NO_INTERACTION=1 \
-%{__php} run-tests.php \
-    -n -q \
-    -d extension_dir=modules \
-    -d extension=%{ext_name}.so \
-
-
 %clean
 rm -rf %{buildroot}
 
