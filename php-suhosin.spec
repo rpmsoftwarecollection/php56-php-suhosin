@@ -8,6 +8,9 @@
 #
 # Please, preserve the changelog entries
 #
+%global _scl_prefix /opt/remi
+%global _scl_vendor remi
+%global scl_vendor remi
 %if 0%{?scl:1}
 %if "%{scl}" == "rh-php56"
 %global sub_prefix more-php56-
