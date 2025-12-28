@@ -44,7 +44,7 @@ Summary:        Suhosin is an advanced protection system for PHP installations
 Group:          Development/Languages
 License:        PHP
 URL:            http://www.hardened-php.net/suhosin/
-Source0:        https://github.com/sektioneins/suhosin/archive/refs/tags/0.9.38.tar.gz
+Source0:        http://download.suhosin.org/suhosin-%{version}.tar.g
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:  %{?scl_prefix}php-devel > 5.4
